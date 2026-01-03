@@ -1,0 +1,159 @@
+﻿Running Gradle task 'assembleRelease'...                        
+flutter : lib/config/theme
+.dart:94:18: Error: The 
+argument type 'CardTheme' 
+can't be assigned to the 
+parameter type 
+'CardThemeData?'.
+At line:1 char:1
++ flutter build apk 
+--release > build_log.txt 
+2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (l  
+  ib/config/them...ardT   
+ hemeData?'.:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+ - 'CardTheme' is from 'pa
+ckage:flutter/src/material
+/card_theme.dart' ('/C:/fl
+utter/packages/flutter/lib
+/src/material/card_theme.d
+art').
+ - 'CardThemeData' is 
+from 'package:flutter/src/
+material/card_theme.dart' 
+('/C:/flutter/packages/flu
+tter/lib/src/material/card
+_theme.dart').
+      cardTheme: 
+CardTheme(
+                 ^
+lib/config/theme.dart:225:
+18: Error: The argument 
+type 'CardTheme' can't be 
+assigned to the parameter 
+type 'CardThemeData?'.
+ - 'CardTheme' is from 'pa
+ckage:flutter/src/material
+/card_theme.dart' ('/C:/fl
+utter/packages/flutter/lib
+/src/material/card_theme.d
+art').
+ - 'CardThemeData' is 
+from 'package:flutter/src/
+material/card_theme.dart' 
+('/C:/flutter/packages/flu
+tter/lib/src/material/card
+_theme.dart').
+      cardTheme: 
+CardTheme(
+                 ^
+lib/screens/home/home_scre
+en.dart:192:69: Error: 
+The getter 
+'driverEarnings' isn't 
+defined for the type 
+'Pricing'.
+ - 'Pricing' is from 'pack
+age:driver_app/models/orde
+r_model.dart' ('lib/models
+/order_model.dart').
+Try correcting the name 
+to the name of an 
+existing getter, or 
+defining a getter or 
+field named 
+'driverEarnings'.
+                    '${App
+Constants.currencySymbol} 
+${order.pricing.driverEarn
+ings.toStringAsFixed(2)}',
+                          
+                          
+                
+^^^^^^^^^^^^^^
+lib/screens/home/home_scre
+en.dart:215:28: Error: 
+The getter 'distance' 
+isn't defined for the 
+type 'OrderModel'.
+ - 'OrderModel' is from 'p
+ackage:driver_app/models/o
+rder_model.dart' ('lib/mod
+els/order_model.dart').
+Try correcting the name 
+to the name of an 
+existing getter, or 
+defining a getter or 
+field named 'distance'.
+                  '${order
+.distance?.toStringAsFixed
+(1) ?? '0.0'} km',
+                          
+ ^^^^^^^^
+lib/screens/delivery/activ
+e_delivery_screen.dart:123
+:79: Error: The getter 
+'driverEarnings' isn't 
+defined for the type 
+'Pricing'.
+ - 'Pricing' is from 'pack
+age:driver_app/models/orde
+r_model.dart' ('lib/models
+/order_model.dart').
+Try correcting the name 
+to the name of an 
+existing getter, or 
+defining a getter or 
+field named 
+'driverEarnings'.
+                          
+    '${AppConstants.curren
+cySymbol} ${order.pricing.
+driverEarnings.toStringAsF
+ixed(2)}',
+                          
+                          
+                          
+^^^^^^^^^^^^^^
+Target 
+kernel_snapshot_program 
+failed: Exception
+
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for task 
+':app:compileFlutterBuildR
+elease'.
+> Process 'command 'C:\flu
+tter\bin\flutter.bat'' 
+finished with non-zero 
+exit value 1
+
+* Try:
+> Run with --stacktrace 
+option to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to get 
+full insights.
+> Get more help at 
+https://help.gradle.org.
+
+BUILD FAILED in 13s
+Running Gradle task 'assembleRelease'...                           13.6s
+Gradle task 
+assembleRelease failed 
+with exit code 1

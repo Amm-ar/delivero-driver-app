@@ -1,0 +1,102 @@
+﻿Running Gradle task 'assembleRelease'...                        
+flutter : lib/models/order
+_model.dart:233:7: Error: 
+'DeliveryAddress' is 
+already declared in this 
+scope.
+At line:1 char:1
++ flutter build apk 
+--release > 
+build_log_v3.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+    + CategoryInfo        
+      : NotSpecified: (l  
+  ib/models/orde... in    
+ this scope.:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+class DeliveryAddress {
+      ^^^^^^^^^^^^^^^
+lib/models/order_model.dar
+t:159:7: Context: 
+Previous declaration of 
+'DeliveryAddress'.
+class DeliveryAddress {
+      ^^^^^^^^^^^^^^^
+lib/models/order_model.dar
+t:283:7: Error: 
+'PaymentInfo' is already 
+declared in this scope.
+class PaymentInfo {
+      ^^^^^^^^^^^
+lib/models/order_model.dar
+t:209:7: Context: 
+Previous declaration of 
+'PaymentInfo'.
+class PaymentInfo {
+      ^^^^^^^^^^^
+lib/models/order_model.dar
+t:9:9: Error: 
+'DeliveryAddress' isn't a 
+type.
+  final DeliveryAddress 
+deliveryAddress;
+        ^^^^^^^^^^^^^^^
+lib/models/order_model.dar
+t:9:9: Context: This 
+isn't a type.
+  final DeliveryAddress 
+deliveryAddress;
+        ^^^^^^^^^^^^^^^
+lib/models/order_model.dar
+t:14:9: Error: 
+'PaymentInfo' isn't a 
+type.
+  final PaymentInfo 
+payment;
+        ^^^^^^^^^^^
+lib/models/order_model.dar
+t:14:9: Context: This 
+isn't a type.
+  final PaymentInfo 
+payment;
+        ^^^^^^^^^^^
+Target 
+kernel_snapshot_program 
+failed: Exception
+
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for task 
+':app:compileFlutterBuildR
+elease'.
+> Process 'command 'C:\flu
+tter\bin\flutter.bat'' 
+finished with non-zero 
+exit value 1
+
+* Try:
+> Run with --stacktrace 
+option to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to get 
+full insights.
+> Get more help at 
+https://help.gradle.org.
+
+BUILD FAILED in 13s
+Running Gradle task 'assembleRelease'...                           13.5s
+Gradle task 
+assembleRelease failed 
+with exit code 1

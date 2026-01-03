@@ -12,7 +12,8 @@ class OrderModel {
   final DateTime createdAt;
   final DateTime? deliveredAt;
   final PaymentInfo payment;
-  
+  final double? distance; // Added distance field
+
   OrderModel({
     this.id,
     required this.orderNumber,
@@ -27,6 +28,7 @@ class OrderModel {
     required this.createdAt,
     this.deliveredAt,
     required this.payment,
+    this.distance,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class OrderModel {
       createdAt: DateTime.parse(json['createdAt']),
       deliveredAt: json['deliveredAt'] != null ? DateTime.parse(json['deliveredAt']) : null,
       payment: PaymentInfo.fromJson(json['payment']),
+      distance: json['distance'] != null ? json['distance'].toDouble() : null,
     );
   }
 
@@ -53,6 +56,7 @@ class OrderModel {
       'items': items.map((i) => i.toJson()).toList(),
       'deliveryAddress': deliveryAddress.toJson(),
       'payment': payment.toJson(),
+      'distance': distance,
     };
   }
 
@@ -119,12 +123,14 @@ class Pricing {
   final double deliveryFee;
   final double serviceFee;
   final double total;
+  final double driverEarnings;
 
   Pricing({
     required this.subtotal,
     required this.deliveryFee,
     required this.serviceFee,
     required this.total,
+    required this.driverEarnings,
   });
 
   factory Pricing.fromJson(Map<String, dynamic> json) {
@@ -133,6 +139,9 @@ class Pricing {
       deliveryFee: json['deliveryFee'].toDouble(),
       serviceFee: json['serviceFee'].toDouble(),
       total: json['total'].toDouble(),
+      driverEarnings: json['driverEarnings'] != null 
+          ? json['driverEarnings'].toDouble() 
+          : json['deliveryFee'].toDouble(),
     );
   }
 
@@ -142,6 +151,7 @@ class Pricing {
       'deliveryFee': deliveryFee,
       'serviceFee': serviceFee,
       'total': total,
+      'driverEarnings': driverEarnings,
     };
   }
 }
@@ -219,3 +229,5 @@ class PaymentInfo {
     };
   }
 }
+
+

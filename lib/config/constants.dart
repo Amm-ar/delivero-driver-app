@@ -1,6 +1,6 @@
 class ApiConstants {
   // Production URL
-  static const String baseUrl = 'https://delivero-backend.onrender.com';
+  static const String baseUrl = 'https://delivero-backend-gay2.onrender.com';
   static const String apiVersion = '/api';
   
   // API Endpoints

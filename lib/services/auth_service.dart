@@ -65,7 +65,7 @@ class AuthService {
           'email': email,
           'phone': phone,
           'password': password,
-          'role': 'customer',
+          'role': 'driver',
         },
       );
 

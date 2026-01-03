@@ -1,0 +1,105 @@
+﻿Running Gradle task 'assembleRelease'...                        
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 3372 bytes (99.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+flutter : warning: 
+[options] source value 8 
+is obsolete and will be 
+removed in a future 
+release
+At line:1 char:1
++ flutter build apk 
+--release > 
+build_debug.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (w  
+  arning: [optio... fut   
+ ure release:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+warning: [options] target 
+value 8 is obsolete and 
+will be removed in a 
+future release
+warning: [options] To 
+suppress warnings about 
+obsolete options, use 
+-Xlint:-options.
+C:\Users\Ammar\AppData\Loc
+al\Pub\Cache\hosted\pub.de
+v\flutter_local_notificati
+ons-16.3.3\android\src\mai
+n\java\com\dexterous\flutt
+erlocalnotifications\Flutt
+erLocalNotificationsPlugin
+.java:1033: error: 
+reference to bigLargeIcon 
+is ambiguous
+      bigPictureStyle.bigL
+argeIcon(null);
+                     ^
+  both method 
+bigLargeIcon(Bitmap) in 
+BigPictureStyle and 
+method bigLargeIcon(Icon) 
+in BigPictureStyle match
+1 error
+3 warnings
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for task 
+':flutter_local_notificati
+ons:compileReleaseJavaWith
+Javac'.
+> Compilation failed; see 
+the compiler output below.
+  warning: [options] To 
+suppress warnings about 
+obsolete options, use 
+-Xlint:-options.warning: 
+[options] source value 8 
+is obsolete and will be 
+removed in a future 
+releasewarning: [options] 
+target value 8 is 
+obsolete and will be 
+removed in a future releas
+eC:\Users\Ammar\AppData\Lo
+cal\Pub\Cache\hosted\pub.d
+ev\flutter_local_notificat
+ions-16.3.3\android\src\ma
+in\java\com\dexterous\flut
+terlocalnotifications\Flut
+terLocalNotificationsPlugi
+n.java:1033: error: 
+reference to bigLargeIcon 
+is ambiguous
+        bigPictureStyle.bi
+gLargeIcon(null);
+                       ^
+    both method 
+bigLargeIcon(Bitmap) in 
+BigPictureStyle and 
+method bigLargeIcon(Icon) 
+in BigPictureStyle match
+  1 error
+  3 warnings
+
+* Try:
+> Check your code and 
+dependencies to fix the 
+compilation error(s)
+> Run with --scan to get 
+full insights.
+
+BUILD FAILED in 17s
+Running Gradle task 'assembleRelease'...                           18.0s
+Gradle task 
+assembleRelease failed 
+with exit code 1
