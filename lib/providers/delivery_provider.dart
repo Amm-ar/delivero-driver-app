@@ -134,4 +134,15 @@ class DeliveryProvider with ChangeNotifier {
       );
     }
   }
+
+  // Update location from service
+  void updateLocationFromService(Position position) {
+    _currentPosition = position;
+    notifyListeners();
+    
+    // Only update backend if there's an active delivery
+    if (_activeDelivery != null) {
+      updateLocation();
+    }
+  }
 }

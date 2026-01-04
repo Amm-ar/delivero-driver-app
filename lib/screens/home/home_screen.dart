@@ -4,6 +4,7 @@ import '../../config/theme.dart';
 import '../../config/constants.dart';
 import '../../providers/delivery_provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../services/location_service.dart';
 import '../../models/order_model.dart';
 import '../delivery/active_delivery_screen.dart';
 
@@ -21,7 +22,21 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<DeliveryProvider>(context, listen: false);
       provider.getCurrentLocation();
+      
+      // Initialize Location Service
+      LocationService().initialize(provider);
+      
+      // Start tracking if already available (unlikely on init, but safe)
+      if (provider.isAvailable) {
+        LocationService().startTracking();
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    LocationService().stopTracking();
+    super.dispose();
   }
 
   @override
@@ -133,7 +148,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Switch(
                       value: provider.isAvailable,
-                      onChanged: (_) => provider.toggleAvailability(),
+                      onChanged: (_) async {
+                        await provider.toggleAvailability();
+                        if (provider.isAvailable) {
+                          LocationService().startTracking();
+                        } else {
+                          LocationService().stopTracking();
+                        }
+                      },
                       activeColor: AppColors.palmGreen,
                     ),
                   ],

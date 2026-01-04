@@ -9,6 +9,8 @@ class OrderModel {
   final DeliveryAddress deliveryAddress;
   final String status;
   final String? driver;
+  final double? restaurantLatitude;
+  final double? restaurantLongitude;
   final DateTime createdAt;
   final DateTime? deliveredAt;
   final PaymentInfo payment;
@@ -25,6 +27,8 @@ class OrderModel {
     required this.deliveryAddress,
     required this.status,
     this.driver,
+    this.restaurantLatitude,
+    this.restaurantLongitude,
     required this.createdAt,
     this.deliveredAt,
     required this.payment,
@@ -43,6 +47,12 @@ class OrderModel {
       deliveryAddress: DeliveryAddress.fromJson(json['deliveryAddress']),
       status: json['status'],
       driver: json['driver'],
+      restaurantLatitude: json['restaurant'] is Map && json['restaurant']['location'] != null
+          ? json['restaurant']['location']['coordinates'][1].toDouble()
+          : null,
+      restaurantLongitude: json['restaurant'] is Map && json['restaurant']['location'] != null
+          ? json['restaurant']['location']['coordinates'][0].toDouble()
+          : null,
       createdAt: DateTime.parse(json['createdAt']),
       deliveredAt: json['deliveredAt'] != null ? DateTime.parse(json['deliveredAt']) : null,
       payment: PaymentInfo.fromJson(json['payment']),
