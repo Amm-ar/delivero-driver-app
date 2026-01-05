@@ -7,9 +7,6 @@ import 'screens/auth/login_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'providers/auth_provider.dart';
 import 'providers/delivery_provider.dart';
-import 'providers/locale_provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,32 +20,16 @@ class DriverApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()..initialize()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => DeliveryProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, localeProvider, child) {
-          return MaterialApp(
-            title: 'Delivero Driver',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            debugShowCheckedModeBanner: false,
-            locale: localeProvider.locale,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en'),
-              Locale('ar'),
-            ],
-            home: const AuthWrapper(),
-          );
-        },
+      child: MaterialApp(
+        title: 'Delivero Driver',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
+        debugShowCheckedModeBanner: false,
+        home: const AuthWrapper(),
       ),
     );
   }

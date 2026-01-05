@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/order_model.dart';
-import '../models/user_model.dart';
 import '../services/delivery_service.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -20,12 +19,6 @@ class DeliveryProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   Position? get currentPosition => _currentPosition;
-
-  void initializeFromUser(User? user) {
-    if (user != null) {
-      _isAvailable = user.isAvailable;
-    }
-  }
 
   // Get current location
   Future<void> getCurrentLocation() async {
@@ -139,17 +132,6 @@ class DeliveryProvider with ChangeNotifier {
         _currentPosition!.latitude,
         _currentPosition!.longitude,
       );
-    }
-  }
-
-  // Update location from service
-  void updateLocationFromService(Position position) {
-    _currentPosition = position;
-    notifyListeners();
-    
-    // Only update backend if there's an active delivery
-    if (_activeDelivery != null) {
-      updateLocation();
     }
   }
 }

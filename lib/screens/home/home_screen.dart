@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import '../../config/theme.dart';
 import '../../config/constants.dart';
 import '../../providers/delivery_provider.dart';
-import '../../providers/auth_provider.dart';
-import '../../services/location_service.dart';
 import '../../models/order_model.dart';
 import '../delivery/active_delivery_screen.dart';
 
@@ -21,26 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<DeliveryProvider>(context, listen: false);
-      final auth = Provider.of<AuthProvider>(context, listen: false);
-      
-      provider.initializeFromUser(auth.user);
       provider.getCurrentLocation();
-      
-      // Initialize Location Service
-      LocationService().initialize(provider);
-      
-      // Start tracking if already available (unlikely on init, but safe)
-      if (provider.isAvailable) {
-        LocationService().startTracking();
-        provider.fetchAvailableOrders();
-      }
     });
-  }
-
-  @override
-  void dispose() {
-    LocationService().stopTracking();
-    super.dispose();
   }
 
   @override
@@ -60,64 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: provider.isAvailable ? provider.fetchAvailableOrders : null,
               ),
             ],
-          ),
-          drawer: Drawer(
-            child: Consumer<AuthProvider>(
-              builder: (context, auth, child) => ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                    decoration: BoxDecoration(
-                      gradient: AppColors.primaryGradient,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.delivery_dining, size: 30, color: AppColors.nileBlue),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          auth.user?.name ?? 'Driver Name',
-                          style: AppTextStyles.h4.copyWith(color: Colors.white),
-                        ),
-                        Text(
-                          auth.user?.email ?? '',
-                          style: AppTextStyles.bodySmall.copyWith(color: Colors.white70),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.person_outline, color: AppColors.nileBlue),
-                    title: const Text('Profile Settings'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Navigator.push(...) coming soon
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.history, color: AppColors.nileBlue),
-                    title: const Text('Earnings History'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Navigator.push(...) coming soon
-                    },
-                  ),
-                  const Divider(),
-                  ListTile(
-                    leading: const Icon(Icons.logout, color: AppColors.error),
-                    title: const Text('Logout'),
-                    onTap: () {
-                      auth.logout();
-                    },
-                  ),
-                ],
-              ),
-            ),
           ),
           body: Column(
             children: [
@@ -152,14 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Switch(
                       value: provider.isAvailable,
-                      onChanged: (_) async {
-                        await provider.toggleAvailability();
-                        if (provider.isAvailable) {
-                          LocationService().startTracking();
-                        } else {
-                          LocationService().stopTracking();
-                        }
-                      },
+                      onChanged: (_) => provider.toggleAvailability(),
                       activeColor: AppColors.palmGreen,
                     ),
                   ],

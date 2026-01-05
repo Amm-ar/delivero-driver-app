@@ -119,7 +119,7 @@ class DeliveryService {
       if (response.statusCode == 200 && response.data['success']) {
         return {
           'success': true,
-          'isAvailable': response.data['data']['isAvailable'],
+          'isAvailable': response.data['data']['driverProfile']['isAvailable'],
         };
       } else {
         return {

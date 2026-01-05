@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../config/theme.dart';
 import '../../config/constants.dart';
 import '../../providers/delivery_provider.dart';
@@ -21,28 +20,15 @@ class ActiveDeliveryScreen extends StatelessWidget {
           );
         }
 
-        final restaurantLat = order.restaurantLatitude ?? 15.5007; 
-        final restaurantLng = order.restaurantLongitude ?? 32.5599;
+        final restaurantLat = 15.5007; // TODO: Get from order.restaurant.location
+        final restaurantLng = 32.5599;
         final customerLat = order.deliveryAddress.latitude;
         final customerLng = order.deliveryAddress.longitude;
-
-        Future<void> openInMaps() async {
-          final url = 'https://www.google.com/maps/dir/?api=1&origin=$restaurantLat,$restaurantLng&destination=$customerLat,$customerLng&travelmode=driving';
-          if (await canLaunchUrl(Uri.parse(url))) {
-            await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-          }
-        }
 
         return Scaffold(
           appBar: AppBar(
             title: const Text('Active Delivery'),
             automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.map),
-                onPressed: openInMaps,
-              ),
-            ],
           ),
           body: Column(
             children: [

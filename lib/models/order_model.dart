@@ -9,8 +9,6 @@ class OrderModel {
   final DeliveryAddress deliveryAddress;
   final String status;
   final String? driver;
-  final double? restaurantLatitude;
-  final double? restaurantLongitude;
   final DateTime createdAt;
   final DateTime? deliveredAt;
   final PaymentInfo payment;
@@ -27,8 +25,6 @@ class OrderModel {
     required this.deliveryAddress,
     required this.status,
     this.driver,
-    this.restaurantLatitude,
-    this.restaurantLongitude,
     required this.createdAt,
     this.deliveredAt,
     required this.payment,
@@ -47,12 +43,6 @@ class OrderModel {
       deliveryAddress: DeliveryAddress.fromJson(json['deliveryAddress']),
       status: json['status'],
       driver: json['driver'],
-      restaurantLatitude: json['restaurant'] is Map && json['restaurant']['location'] != null
-          ? json['restaurant']['location']['coordinates'][1].toDouble()
-          : null,
-      restaurantLongitude: json['restaurant'] is Map && json['restaurant']['location'] != null
-          ? json['restaurant']['location']['coordinates'][0].toDouble()
-          : null,
       createdAt: DateTime.parse(json['createdAt']),
       deliveredAt: json['deliveredAt'] != null ? DateTime.parse(json['deliveredAt']) : null,
       payment: PaymentInfo.fromJson(json['payment']),
@@ -167,15 +157,19 @@ class Pricing {
 }
 
 class DeliveryAddress {
-  final String label;
-  final String address;
+  final String street;
+  final String city;
+  final String state;
+  final String? postalCode;
   final String? instructions;
   final double latitude;
   final double longitude;
 
   DeliveryAddress({
-    required this.label,
-    required this.address,
+    required this.street,
+    required this.city,
+    required this.state,
+    this.postalCode,
     this.instructions,
     required this.latitude,
     required this.longitude,
@@ -183,18 +177,22 @@ class DeliveryAddress {
 
   factory DeliveryAddress.fromJson(Map<String, dynamic> json) {
     return DeliveryAddress(
-      label: json['label'] ?? '',
-      address: json['address'] ?? '',
+      street: json['street'],
+      city: json['city'],
+      state: json['state'],
+      postalCode: json['postalCode'],
       instructions: json['instructions'],
-      latitude: json['location']?['coordinates']?[1]?.toDouble() ?? 0.0,
-      longitude: json['location']?['coordinates']?[0]?.toDouble() ?? 0.0,
+      latitude: json['location']['coordinates'][1],
+      longitude: json['location']['coordinates'][0],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'label': label,
-      'address': address,
+      'street': street,
+      'city': city,
+      'state': state,
+      'postalCode': postalCode,
       'instructions': instructions,
       'location': {
         'type': 'Point',
@@ -204,7 +202,7 @@ class DeliveryAddress {
   }
 
   String get fullAddress {
-    return address;
+    return '$street, $city, $state${postalCode != null ? ", $postalCode" : ""}';
   }
 }
 
