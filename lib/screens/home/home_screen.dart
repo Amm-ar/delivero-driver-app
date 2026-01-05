@@ -21,6 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<DeliveryProvider>(context, listen: false);
+      final auth = Provider.of<AuthProvider>(context, listen: false);
+      
+      provider.initializeFromUser(auth.user);
       provider.getCurrentLocation();
       
       // Initialize Location Service
@@ -29,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Start tracking if already available (unlikely on init, but safe)
       if (provider.isAvailable) {
         LocationService().startTracking();
+        provider.fetchAvailableOrders();
       }
     });
   }

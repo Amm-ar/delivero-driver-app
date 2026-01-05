@@ -8,6 +8,7 @@ class User {
   final bool isVerified;
   final List<Address> addresses;
   final bool notificationsEnabled;
+  final bool isAvailable;
 
   User({
     required this.id,
@@ -19,6 +20,7 @@ class User {
     this.isVerified = false,
     this.addresses = const [],
     this.notificationsEnabled = true,
+    this.isAvailable = false,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class User {
               .toList() ??
           [],
       notificationsEnabled: json['notificationsEnabled'] ?? true,
+      isAvailable: json['driverProfile']?['isAvailable'] ?? false,
     );
   }
 
@@ -49,6 +52,9 @@ class User {
       'isVerified': isVerified,
       'addresses': addresses.map((a) => a.toJson()).toList(),
       'notificationsEnabled': notificationsEnabled,
+      'driverProfile': {
+        'isAvailable': isAvailable,
+      },
     };
   }
 
@@ -60,6 +66,7 @@ class User {
     bool? isVerified,
     List<Address>? addresses,
     bool? notificationsEnabled,
+    bool? isAvailable,
   }) {
     return User(
       id: id,
@@ -71,6 +78,7 @@ class User {
       isVerified: isVerified ?? this.isVerified,
       addresses: addresses ?? this.addresses,
       notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
+      isAvailable: isAvailable ?? this.isAvailable,
     );
   }
 }
