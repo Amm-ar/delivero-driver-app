@@ -167,19 +167,15 @@ class Pricing {
 }
 
 class DeliveryAddress {
-  final String street;
-  final String city;
-  final String state;
-  final String? postalCode;
+  final String label;
+  final String address;
   final String? instructions;
   final double latitude;
   final double longitude;
 
   DeliveryAddress({
-    required this.street,
-    required this.city,
-    required this.state,
-    this.postalCode,
+    required this.label,
+    required this.address,
     this.instructions,
     required this.latitude,
     required this.longitude,
@@ -187,22 +183,18 @@ class DeliveryAddress {
 
   factory DeliveryAddress.fromJson(Map<String, dynamic> json) {
     return DeliveryAddress(
-      street: json['street'],
-      city: json['city'],
-      state: json['state'],
-      postalCode: json['postalCode'],
+      label: json['label'] ?? '',
+      address: json['address'] ?? '',
       instructions: json['instructions'],
-      latitude: json['location']['coordinates'][1],
-      longitude: json['location']['coordinates'][0],
+      latitude: json['location']?['coordinates']?[1]?.toDouble() ?? 0.0,
+      longitude: json['location']?['coordinates']?[0]?.toDouble() ?? 0.0,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'street': street,
-      'city': city,
-      'state': state,
-      'postalCode': postalCode,
+      'label': label,
+      'address': address,
       'instructions': instructions,
       'location': {
         'type': 'Point',
@@ -212,7 +204,7 @@ class DeliveryAddress {
   }
 
   String get fullAddress {
-    return '$street, $city, $state${postalCode != null ? ", $postalCode" : ""}';
+    return address;
   }
 }
 
